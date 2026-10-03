@@ -14,6 +14,7 @@ Given an extracted Longhorn support bundle, Chute can:
 - connect PVCs, PVs, Pods, VolumeAttachments, Longhorn volumes, engines, replicas, and nodes using explicit identifiers
 - emit a per-volume case directory containing related objects and provenance
 - conservatively extract log lines that contain identifiers related to the selected volume
+- record unclassified files in the manifest without copying the original bundle
 
 ## Usage
 
@@ -37,20 +38,21 @@ mix run -e 'Chute.CLI.main(["process", "/path/to/bundle"])'
 processed/
 ├── manifest.json
 ├── index.json
-├── volumes/
-│   └── <volume>/
-│       ├── summary.md
-│       ├── evidence.json
-│       ├── volume.yaml
-│       ├── engines.yaml
-│       ├── replicas.yaml
-│       ├── pv.yaml
-│       ├── pvc.yaml
-│       ├── pods.yaml
-│       ├── volume_attachments.yaml
-│       ├── relevant_logs.log
-│       └── sources.json
-└── unclassified/
+└── volumes/
+    └── <volume>/
+        ├── summary.md
+        ├── evidence.json
+        ├── sources.json
+        ├── volume.yaml
+        ├── engines.yaml
+        ├── replicas.yaml
+        ├── pv.yaml
+        ├── pvc.yaml
+        ├── pods.yaml
+        ├── volume_attachments.yaml
+        ├── kubernetes_nodes.yaml
+        ├── longhorn_nodes.yaml
+        └── relevant_logs.log
 ```
 
 ## Boundary
