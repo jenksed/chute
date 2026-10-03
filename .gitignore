@@ -1,0 +1,8 @@
+/_build/
+/deps/
+/doc/
+/.cover
+/chute
+/chute-output/
+/chute-case-*/
+erl_crash.dump
