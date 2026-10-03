@@ -31,7 +31,7 @@ defmodule Chute.Logs do
           |> IO.stream(:line)
           |> Stream.with_index(1)
           |> Enum.reduce(acc, fn {line, line_number}, file_acc ->
-            if match?(line, identifiers) do
+            if line_matches?(line, identifiers) do
               include_match(file_acc, source, line_number, line)
             else
               file_acc
@@ -46,8 +46,11 @@ defmodule Chute.Logs do
     end
   end
 
-  defp match?(_line, []), do: false
-  defp match?(line, identifiers), do: Enum.any?(identifiers, &String.contains?(line, &1))
+  defp line_matches?(_line, []), do: false
+
+  defp line_matches?(line, identifiers) do
+    Enum.any?(identifiers, &String.contains?(line, &1))
+  end
 
   defp include_match(acc, source, line_number, line) do
     matched_lines = acc.matched_lines + 1
